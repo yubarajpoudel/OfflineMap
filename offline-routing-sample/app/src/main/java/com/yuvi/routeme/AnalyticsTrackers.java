@@ -58,7 +58,7 @@ public final class AnalyticsTrackers {
       Tracker tracker;
       switch (target) {
         case APP:
-          tracker = GoogleAnalytics.getInstance(mContext).newTracker(drawable.com.lassana.routeme.R.xml.app_tracker);
+          tracker = GoogleAnalytics.getInstance(mContext).newTracker(R.xml.app_tracker);
           break;
         default:
           throw new IllegalArgumentException("Unhandled analytics target " + target);

@@ -13,6 +13,7 @@ import android.widget.ViewSwitcher;
 
 import com.squareup.otto.Subscribe;
 import com.yuvi.routeme.App;
+import com.yuvi.routeme.R;
 import com.yuvi.routeme.map.downloader.MapDownloaderLoader;
 import com.yuvi.routeme.util.event.MapDownloaderProgressEvent;
 import com.yuvi.routeme.util.event.MapSuccessfulDownloadedEvent;
@@ -36,7 +37,7 @@ public class MapDownloaderFragment extends Fragment {
 
         @Override
         public void onLoadFinished(Loader<Boolean> loader, Boolean data) {
-            getLoaderManager().destroyLoader(drawable.com.lassana.routeme.R.id.loader_map_downloader);
+            getLoaderManager().destroyLoader(R.id.loader_map_downloader);
             App.getApplication(getActivity()).sendOttoEvent(new MapSuccessfulDownloadedEvent());
         }
 
@@ -56,34 +57,34 @@ public class MapDownloaderFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(drawable.com.lassana.routeme.R.layout.fragment_map_downloader, container, false);
+        return inflater.inflate(R.layout.fragment_map_downloader, container, false);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getLoaderManager().destroyLoader(drawable.com.lassana.routeme.R.id.loader_map_downloader);
+        getLoaderManager().destroyLoader(R.id.loader_map_downloader);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewSwitcher = (ViewSwitcher) view.findViewById(drawable.com.lassana.routeme.R.id.view_flipper);
-        mDownloadingProgressTextView = (TextView) view.findViewById(drawable.com.lassana.routeme.R.id.text_view_downloading_progress);
-        mDownloadingProgressBar = (ProgressBar) view.findViewById(drawable.com.lassana.routeme.R.id.progress_bar_downloading);
-        view.findViewById(drawable.com.lassana.routeme.R.id.button_start_downloading).setOnClickListener(new View.OnClickListener() {
+        mViewSwitcher = (ViewSwitcher) view.findViewById(R.id.view_flipper);
+        mDownloadingProgressTextView = (TextView) view.findViewById(R.id.text_view_downloading_progress);
+        mDownloadingProgressBar = (ProgressBar) view.findViewById(R.id.progress_bar_downloading);
+        view.findViewById(R.id.button_start_downloading).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startDownloading();
             }
         });
-        view.findViewById(drawable.com.lassana.routeme.R.id.button_cancel_downloading).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.button_cancel_downloading).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopDownloading();
             }
         });
-        mViewSwitcher.setDisplayedChild(getLoaderManager().getLoader(drawable.com.lassana.routeme.R.id.loader_map_downloader) == null ? 0 : 1);
+        mViewSwitcher.setDisplayedChild(getLoaderManager().getLoader(R.id.loader_map_downloader) == null ? 0 : 1);
     }
 
     @Override
@@ -99,13 +100,13 @@ public class MapDownloaderFragment extends Fragment {
     }
 
     private void stopDownloading() {
-        getLoaderManager().destroyLoader(drawable.com.lassana.routeme.R.id.loader_map_downloader);
+        getLoaderManager().destroyLoader(R.id.loader_map_downloader);
         mViewSwitcher.setDisplayedChild(0);
     }
 
     private void startDownloading() {
         answerAvailable(new MapDownloaderProgressEvent(0));
-        getLoaderManager().initLoader(drawable.com.lassana.routeme.R.id.loader_map_downloader, null, mLoadManager);
+        getLoaderManager().initLoader(R.id.loader_map_downloader, null, mLoadManager);
         mViewSwitcher.setDisplayedChild(1);
     }
 
@@ -114,7 +115,7 @@ public class MapDownloaderFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mDownloadingProgressTextView.setText(getString(drawable.com.lassana.routeme.R.string.text_view_downloading_progress, event.progress));
+                mDownloadingProgressTextView.setText(getString(R.string.text_view_downloading_progress, event.progress));
                 mDownloadingProgressBar.setProgress(event.progress);
             }
         });

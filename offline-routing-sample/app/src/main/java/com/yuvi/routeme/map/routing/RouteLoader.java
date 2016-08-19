@@ -14,6 +14,7 @@ import com.graphhopper.PathWrapper;
 import com.graphhopper.routing.util.EncodingManager;
 import com.graphhopper.util.Parameters;
 import com.graphhopper.util.PointList;
+import com.yuvi.routeme.R;
 import com.yuvi.routeme.map.downloader.AbstractMap;
 import com.yuvi.routeme.util.LogUtils;
 
@@ -145,7 +146,7 @@ public class RouteLoader extends AsyncTaskLoader<RouteLoader.Result> {
 
 
     public static boolean isRunning(@NonNull LoaderManager loaderManager) {
-        final Loader<Object> loader = loaderManager.getLoader(drawable.com.lassana.routeme.R.id.loader_find_route);
+        final Loader<Object> loader = loaderManager.getLoader(R.id.loader_find_route);
         return loader != null && loader.isStarted();
     }
 

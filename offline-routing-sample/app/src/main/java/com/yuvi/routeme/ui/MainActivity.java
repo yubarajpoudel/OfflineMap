@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.squareup.otto.Subscribe;
 import com.yuvi.routeme.App;
+import com.yuvi.routeme.R;
 import com.yuvi.routeme.map.downloader.AbstractMap;
 import com.yuvi.routeme.util.event.MapSuccessfulDownloadedEvent;
 
@@ -16,7 +17,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(drawable.com.lassana.routeme.R.layout.activity_main);
+        setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             updateContent(false);
         }
@@ -49,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
             mCurrentFragment = AbstractMap.instance().exist(this)
                     ? new MapFragment()
                     : new MapDownloaderFragment();
-            getSupportFragmentManager().beginTransaction().replace(drawable.com.lassana.routeme.R.id.frame_container, mCurrentFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, mCurrentFragment).commit();
         }
     }
 

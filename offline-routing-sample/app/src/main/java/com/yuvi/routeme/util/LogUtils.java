@@ -2,7 +2,8 @@ package com.yuvi.routeme.util;
 
 import android.util.Log;
 
-import drawable.com.lassana.routeme.BuildConfig;
+import com.yuvi.routeme.BuildConfig;
+
 
 /**
  * @author Nikolai Doronin {@literal <lassana.nd@gmail.com>}

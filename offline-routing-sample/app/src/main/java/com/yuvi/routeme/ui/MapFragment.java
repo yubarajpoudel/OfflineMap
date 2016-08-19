@@ -21,6 +21,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.yuvi.routeme.R;
 import com.yuvi.routeme.map.MapsConfig;
 import com.yuvi.routeme.map.downloader.AbstractMap;
 import com.yuvi.routeme.map.marker.CustomMarker;
@@ -183,7 +184,7 @@ public class MapFragment extends Fragment implements GoogleApiClient.ConnectionC
         @Override
         public void onLoadFinished(Loader<RouteLoader.Result> loader, RouteLoader.Result data) {
             mCurrentRouteGeoPoints = new ArrayList<>(data.getGeoPoints());
-            getLoaderManager().destroyLoader(drawable.com.lassana.routeme.R.id.loader_find_route);
+            getLoaderManager().destroyLoader(R.id.loader_find_route);
             mMapView.post(new Runnable() {
                 @Override
                 public void run() {
@@ -215,12 +216,12 @@ public class MapFragment extends Fragment implements GoogleApiClient.ConnectionC
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rvalue = inflater.inflate(drawable.com.lassana.routeme.R.layout.fragment_map, container, false);
+        final View rvalue = inflater.inflate(R.layout.fragment_map, container, false);
         tileCache = AndroidUtil.createTileCache(getActivity(), MapsConfig.TILE_CACHE_ID, MapsConfig.TILE_SIZE, MapsConfig.SCREEN_RATION, MapsConfig.OVERDRAW);
         final File mapFile = AbstractMap.instance().getMapsforgeFile(getActivity());
         mMapView = new MapsforgeMapView(getActivity(), tileCache, mapFile.getAbsolutePath());
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        RelativeLayout forMap = (RelativeLayout) rvalue.findViewById(drawable.com.lassana.routeme.R.id.layout_map);
+        RelativeLayout forMap = (RelativeLayout) rvalue.findViewById(R.id.layout_map);
         forMap.addView(mMapView, 0, params);
         buildGoogleApiClient();
         return rvalue;
@@ -235,19 +236,19 @@ public class MapFragment extends Fragment implements GoogleApiClient.ConnectionC
         mMapView.setBuiltInZoomControls(false);
         mMapView.setUseDataConnection(false);
 
-        view.findViewById(drawable.com.lassana.routeme.R.id.img_btn_zoom_in).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.img_btn_zoom_in).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 mMapView.getController().zoomIn();
             }
         });
-        view.findViewById(drawable.com.lassana.routeme.R.id.img_btn_zoom_out).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.img_btn_zoom_out).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 mMapView.getController().zoomOut();
             }
         });
-        view.findViewById(drawable.com.lassana.routeme.R.id.btn_get_location).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.btn_get_location).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LOGD(TAG, "My location button clicked; mLocationManager is" + (mGoogleApiClient == null ? " " : " NOT ") + "null");
@@ -255,11 +256,11 @@ public class MapFragment extends Fragment implements GoogleApiClient.ConnectionC
             }
         });
 
-        mOverviewLayout = view.findViewById(drawable.com.lassana.routeme.R.id.layout_route);
-        mFindRouteButton = (Button) view.findViewById(drawable.com.lassana.routeme.R.id.button_find_route);
-        mMarkerImageView = (ImageView) view.findViewById(drawable.com.lassana.routeme.R.id.image_view_marker_overview);
-        mMarkerTextView = (TextView) view.findViewById(drawable.com.lassana.routeme.R.id.text_view_marker_title);
-        mMarkerDescriptionTextView = (TextView) view.findViewById(drawable.com.lassana.routeme.R.id.text_view_marker_description);
+        mOverviewLayout = view.findViewById(R.id.layout_route);
+        mFindRouteButton = (Button) view.findViewById(R.id.button_find_route);
+        mMarkerImageView = (ImageView) view.findViewById(R.id.image_view_marker_overview);
+        mMarkerTextView = (TextView) view.findViewById(R.id.text_view_marker_title);
+        mMarkerDescriptionTextView = (TextView) view.findViewById(R.id.text_view_marker_description);
 
         mFindRouteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -267,7 +268,7 @@ public class MapFragment extends Fragment implements GoogleApiClient.ConnectionC
                 if (mTarget != null
                         && mTarget.getLocation() != null
                         && mLastUserPosition != null) {
-                    getLoaderManager().initLoader(drawable.com.lassana.routeme.R.id.loader_find_route, null, mRouteLoadManager);
+                    getLoaderManager().initLoader(R.id.loader_find_route, null, mRouteLoadManager);
                     mFindRouteButton.setEnabled(false);
                 }
             }
@@ -306,7 +307,7 @@ public class MapFragment extends Fragment implements GoogleApiClient.ConnectionC
 
 
     private void updateFindRouteButtonState() {
-        if (getLoaderManager().getLoader(drawable.com.lassana.routeme.R.id.loader_find_route) != null) {
+        if (getLoaderManager().getLoader(R.id.loader_find_route) != null) {
             mFindRouteButton.setEnabled(false);
         } else {
             if (mLastUserPosition != null && mTarget != null) {
@@ -385,8 +386,8 @@ public class MapFragment extends Fragment implements GoogleApiClient.ConnectionC
             MyLocationOverlayItem object =
                     new MyLocationOverlayItem(new GeoPoint(mLastUserPosition.getLatitude(), mLastUserPosition.getLongitude()),
                             getResources(),
-                            drawable.com.lassana.routeme.R.string.title_map_my_location,
-                            drawable.com.lassana.routeme.R.drawable.image_my_location);
+                            R.string.title_map_my_location,
+                            R.drawable.image_my_location);
             mMyLocationOverlayItemArray.add(object);
             mMyLocationOverlayItem =
                     new ItemizedIconOverlay<>(mMyLocationOverlayItemArray,
